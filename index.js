@@ -7,7 +7,7 @@ var params = {
       elements: [
         {
           background: "#00F",
-          width: 20
+          width: 30
         },
         {
           background: "#00F",
@@ -29,11 +29,11 @@ var params = {
         },
         {
           background: "#00F",
-          width: 50
+          width: 25
         },
         {
           background: "#00F",
-          width: 5
+          width: 35
         }
       ]
     },
@@ -58,14 +58,14 @@ var params = {
   ]
 };
 
-function generateColor() {
+generateColor = () => {
   return (
     "#" +
     Math.random()
       .toString(16)
       .slice(2, 8)
   );
-}
+};
 
 const lineWidth = window.innerWidth;
 const lineHeight = window.innerHeight / params.lines.length + "px";
@@ -99,7 +99,7 @@ const paintLine = (line, randomColor) => {
   return parentLine;
 };
 
-params.lines.forEach((line, index) => {
+params.lines.forEach(line => {
   const parentLine = paintLine(line);
 
   document.body.appendChild(parentLine);
