@@ -7,15 +7,15 @@ var params = {
       elements: [
         {
           background: "#00F",
-          width: 25
+          width: 20
         },
         {
           background: "#00F",
-          width: 50
+          width: 30
         },
         {
           background: "#00F",
-          width: 25
+          width: 40
         }
       ]
     },
@@ -25,7 +25,7 @@ var params = {
       elements: [
         {
           background: "#00F",
-          width: 25
+          width: 40
         },
         {
           background: "#00F",
@@ -33,7 +33,7 @@ var params = {
         },
         {
           background: "#00F",
-          width: 25
+          width: 5
         }
       ]
     },
@@ -43,15 +43,15 @@ var params = {
       elements: [
         {
           background: "#00F",
-          width: 25
+          width: 15
+        },
+        {
+          background: "#00F",
+          width: 35
         },
         {
           background: "#00F",
           width: 50
-        },
-        {
-          background: "#00F",
-          width: 25
         }
       ]
     }
@@ -71,8 +71,8 @@ const lineWidth = window.innerWidth;
 const lineHeight = window.innerHeight / params.lines.length + "px";
 const view = [];
 
-function buildLine(line, randomColor) {
-  var lineHTML = document.createElement("div");
+const buildLine = (line, randomColor) => {
+  const lineHTML = document.createElement("div");
 
   lineHTML.style.width = line.width ? line.width + "%" : lineWidth;
   lineHTML.style.height = lineHeight;
@@ -82,29 +82,29 @@ function buildLine(line, randomColor) {
     : line.background;
 
   return lineHTML;
-}
+};
 
-function paintLine(line, randomColor) {
-  var parentLine = buildLine(line, randomColor);
+const paintLine = (line, randomColor) => {
+  const parentLine = buildLine(line, randomColor);
 
   line.elements
-    .map(function(innerLine) {
+    .map(innerLine => {
       return buildLine(innerLine, randomColor);
     })
-    .forEach(function(lineHTML) {
+    .forEach(lineHTML => {
       parentLine.appendChild(lineHTML);
       lineHTML.style.float = "left";
     });
 
   return parentLine;
-}
+};
 
-params.lines.forEach(function(line, index) {
-  var parentLine = paintLine(line);
+params.lines.forEach((line, index) => {
+  const parentLine = paintLine(line);
 
   document.body.appendChild(parentLine);
 
-  setInterval(function() {
+  setInterval(() => {
     parentLine.innerHTML = paintLine(line, true).innerHTML;
   }, line.updateTime);
 });
